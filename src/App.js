@@ -1,37 +1,48 @@
-import logo from './logo.svg';
+// Here is where all the components from their respective pages are imported into the app.js file
+// This is so that they can be used to connect the navbar code in the file to the app
 import React, { Component } from 'react';
 import './App.css';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
-import { Content } from './components/content';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav} from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Icecream } from './components/icecream';
+import { Create } from "./components/create";
+import { Edit } from './components/edit';
+import { Gallery } from './components/gallery';
+import { Home } from './components/home';
+
+
 
 class App extends Component {
-  render(){
+  render() {
     return (
       <Router>
-      <div className="App">
+        <div className="App">
 
-<Navbar bg="primary" variant="dark">
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-    <Nav className="mr-auto">
-      <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/features">Features</Nav.Link>
-      <Nav.Link href="/pricing">Pricing</Nav.Link>
-      <Nav.Link href="/entry">Entry</Nav.Link>
-    </Nav>
-  </Navbar>
+          {/* Here is where the navbar tag starts the navbar component. the navbar links are used to create button links on the navbar that when pressed will lead to their respective pages */}
+          <Navbar bg="primary" variant="dark">
+            <Navbar.Brand href="#home">Ice-Cream Online </Navbar.Brand>
+            <Nav className="mr-auto">
+              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link href="/gallery">Menu</Nav.Link>
+              <Nav.Link href="/icecream">ice-cream</Nav.Link>
+              <Nav.Link href="/create">Add Order</Nav.Link>
+            </Nav>
+          </Navbar>
 
-  <br />
-  <Switch>
-    <Route path="/" component={ Content } exact/>
-    <Route path="/features" component={ Header } exact/>
-    <Route path="/pricing" component={ Footer } exact/>
+          <br />
+          <Switch>
+            {/* The exported classes from each file are passed to the app.js file using the route tag. */}
+            <Route path="/home" component={Home} exact />
+            <Route path="/gallery" component={Gallery} exact />
+            <Route path="/icecream" component={Icecream} exact />
+            <Route path="/create" component={Create} exact />
 
-  </Switch>
-      </div>
+            {/* Here i include the id tag so that each order in the database can be indetified using it's id when i want to edit the orders. */}
+            <Route path="/edit/:id" component={Edit} exact />
+
+          </Switch>
+        </div>
       </Router>
     );
   }
